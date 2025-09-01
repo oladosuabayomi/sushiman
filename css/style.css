@@ -21,3 +21,37 @@
     --color-white: #fff;
     --color-bg: #fff1eb;
 }
+
+* {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+}
+
+body {
+        max-width: 1280px;
+        margin: 0 auto  ;
+        background-color: var(--color-bg);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
