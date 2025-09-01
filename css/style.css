@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* Other css file imports */
+@import url(sections/header.css);
+@import url(sections/hero.css);
+@import url(sections/about.css);
+@import url(sections/popular.css);
+@import url(sections/recent.css);
+@import url(sections/newletter.css);
+@import url(sections/footer.css);
+/* CSS variables for reusability across all files (including above imported)  */
+:root {
+    --koh-santepheap: "Poppins", sans-serif;
+    --poppins: "Koh Santepheap", serif;
+
+    --primary-color: #ff8f1e;
+    --secondary-color: #2f221c;
+
+    --color-white: #fff;
+    --color-bg: #fff1eb;
+}
