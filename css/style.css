@@ -14,8 +14,8 @@
 @import url(sections/footer.css);
 /* CSS variables for reusability across all files (including above imported)  */
 :root {
-    --koh-santepheap: "Poppins", sans-serif;
-    --poppins: "Koh Santepheap", serif;
+    --poppins: "Poppins", sans-serif;
+    --koh-santepheap: "Koh Santepheap", serif;
     --lato: "Lato", sans-serif;
 
     --primary-color: #ff8f1e;
