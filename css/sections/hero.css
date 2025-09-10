@@ -7,10 +7,16 @@
     height: 80vh;
 }
 
-.hero__bg-leaf {
+.hero__bg-leaf__right {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.hero__bg-leaf__left {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .hero-content {
@@ -69,7 +75,7 @@
 }
 
 .hero-content__order-button:hover {
-        transform: scale(1.02);
+    transform: scale(1.02);
 }
 
 .hero-content__order-button img {

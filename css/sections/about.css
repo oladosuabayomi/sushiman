@@ -1,0 +1,44 @@
+.about {
+    position: relative;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+
+.about-content__right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.about-content__subtitle--image {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.about-content__subtitle--image img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.about-content__right p {
+    font-family: var(--poppins);
+    font-weight: 300;
+    font-size: 20px;
+
+    color: var(--secondary-color);
+}
+
+.about__bg-leaf {
+position: absolute;
+
+top: 0;
+right: 0;
+}
+
+

@@ -60,12 +60,25 @@ ul {
 }
 
 .width-80-container {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 }
 
 .section__title {
+    color: var(--primary-color);
+
+    font-family: var(--lato);
+    font-size: 20px;
 }
 
 .section__subtitle {
+    font-family: var(--koh-santepheap);
+    font-size: 40px;
+    font-weight: 400;
+    
+    color: var(--secondary-color);
+}
+
+.section-spacing {
+    margin: 40px 0;
 }
