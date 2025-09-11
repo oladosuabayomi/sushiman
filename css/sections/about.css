@@ -1,5 +1,6 @@
 .about {
     position: relative;
+    height: 80vh;
 }
 
 .about-content {
@@ -35,10 +36,7 @@
 }
 
 .about__bg-leaf {
-position: absolute;
-
-top: 0;
-right: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
-
-

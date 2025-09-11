@@ -1,0 +1,219 @@
+/* Populae dishes with carousel effect  */
+
+.popular {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+
+    height: 80vh;
+}
+.popular-heading {
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.popular-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popular-dishes {
+    width: 100%;
+    overflow-x: auto;
+    padding: 65px 60px 20px 60px; /* Added horizontal padding to prevent cutoff */
+
+    display: flex;
+    gap: 3em; /* Increased gap between cards */
+    justify-content: flex-start; /* Start from left for scrolling */
+
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+}
+
+.popular-dishes::-webkit-scrollbar {
+    display: none;
+}
+
+.popular-scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background: var(--color-white);
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--primary-color);
+    cursor: pointer;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    z-index: 10;
+}
+
+.popular-scroll-btn:hover {
+    background: var(--primary-color);
+    color: var(--color-white);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.popular-scroll-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: translateY(-50%) scale(1);
+}
+
+.popular-scroll-btn--left {
+    left: -25px;
+}
+
+.popular-scroll-btn--right {
+    right: -25px;
+}
+
+.popular-dishes__card-content {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    gap: 40px; /* Increased gap between content elements */
+
+    width: 100%;
+}
+
+.popular-dishes__card {
+    scroll-snap-align: start;
+    background: var(--primary-color);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 143, 30, 1) 0%,
+        rgba(166, 6, 0, 1) 100%
+    );
+    box-shadow: 0px 8px 90px -39px rgba(0, 0, 0, 0.9);
+
+    border-radius: 30px;
+    padding: 100px 30px 40px; /* Increased padding for more height */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative; /* For absolutely positioned image */
+    min-width: 400px;
+    min-height: 340px; /* Added minimum height for consistency */
+}
+
+.popular-dishes__card-img {
+    width: 260px; /* Increased image size for more visual impact */
+    position: absolute;
+    top: -70px; /* Adjusted for larger image */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.popular-dishes__card-desc {
+    text-align: center;
+    margin-bottom: 20px; /* Add space between description and price */
+}
+
+.popular-dishes__dish-name {
+    font-family: var(--koh-santepheap);
+    font-weight: 600;
+    font-size: 28px;
+
+    color: var(--color-white);
+}
+.popular-dishes__dish-origin {
+    font-family: var(--poppins);
+    font-weight: 300;
+    font-size: 16px;
+
+    color: var(--color-white);
+    opacity: 0.6;
+}
+
+.popular-dishes__dish-price {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.popular-dishes__dish-price p {
+    font-family: var(--koh-santepheap);
+    font-weight: 600;
+    font-size: 24px;
+
+    color: var(--color-white);
+}
+
+.popular-dishes__dish-price img {
+    background: var(--secondary-color);
+    padding: 10px;
+
+    border-radius: 50%;
+}
+
+/* Responsive design for different screen sizes */
+@media (max-width: 900px) {
+    .popular-dishes {
+        justify-content: flex-start;
+        padding: 120px 40px 20px 40px; /* Ensure padding on mobile too */
+        gap: 1.5rem;
+    }
+
+    .popular-dishes__card {
+        min-width: 320px;
+        padding: 70px 18px 18px;
+    }
+
+    .popular-dishes__card-img {
+        width: 220px;
+        top: -60px;
+    }
+
+    .popular-scroll-btn {
+        width: 40px;
+        height: 40px;
+        display: var(--buttons-display, flex);
+    }
+
+    .popular-scroll-btn--left {
+        left: -20px;
+    }
+
+    .popular-scroll-btn--right {
+        right: -20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .popular-dishes {
+        padding: 120px 20px 20px 20px; /* Minimal padding on very small screens */
+    }
+
+    .popular-scroll-btn--left {
+        left: 10px;
+    }
+
+    .popular-scroll-btn--right {
+        right: 10px;
+    }
+}
