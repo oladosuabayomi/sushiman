@@ -4,6 +4,11 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="assets/logo.png" type="image/png" />
+        <link
+            href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+            rel="stylesheet"
+        />
+
         <link rel="stylesheet" href="css/style.css" />
         <title>Sushiman</title>
     </head>
@@ -261,7 +266,11 @@
 
         <section class="newsletter section-spacing">
             <div class="newsletter-content width-80-container">
-                <img class="newsletter-content__image" src="assets/newsletter-sushi 1.png" alt="sushi" />
+                <img
+                    class="newsletter-content__image"
+                    src="assets/newsletter-sushi 1.png"
+                    alt="sushi"
+                />
                 <div class="newsletter-content__section-info">
                     <h3 class="newsletter-content__section-title">
                         Newsletter
@@ -270,20 +279,151 @@
                         Subscribe for latest update
                     </h2>
                     <button class="newsletter-content__subscribe-button">
-                        <input class="newsletter-content__subscribe-button--input"
+                        <input
+                            class="newsletter-content__subscribe-button--input"
                             type="email"
                             placeholder="Enter email"
                             required
                         />
-                        <a class="newsletter-content__subscribe-button--subscribe" href="#">
+                        <a
+                            class="newsletter-content__subscribe-button--subscribe"
+                            href="#"
+                        >
                             subscribe
-                            <img src="assets/ri_send-plane-fill.png" alt="subscribe" />
+                            <img
+                                src="assets/ri_send-plane-fill.png"
+                                alt="subscribe"
+                            />
                         </a>
                     </button>
                 </div>
             </div>
         </section>
 
+        <section class="footer section-spacing">
+            <div class="footer-main width-80-container">
+                <div class="footer-content width-80-container">
+                    <div class="footer-content__footer-about">
+                        <div class="footer__logo">
+                            <img src="assets/logo.png" alt="logo" />
+                            <p class="footer__logo-text">Shushi</p>
+                        </div>
+                        <p>
+                            Food for the body is not enough. There must be foos
+                            for the soul.
+                        </p>
+                        <img
+                            class="footer-content__footer-about--leaf"
+                            src="assets/spinach-leaf 1.png"
+                            alt="leaf"
+                        />
+                    </div>
+                    <div class="footer-content__quicklinks">
+                        <h4>Main menu</h4>
+                        <div class="footer-content__quicklinks-links">
+                            <a href="#">About</a>
+                            <a href="#">Menus</a>
+                            <a href="#">Offers</a>
+                            <a href="#">Event</a>
+                        </div>
+                    </div>
+                    <div class="footer-content__quicklinks">
+                        <h4>Information</h4>
+                        <div class="footer-content__quicklinks-links">
+                            <a href="#">Contact</a>
+                            <a href="#">Orders & Returns</a>
+                            <a href="#">Video</a>
+                            <a href="#">Reservation</a>
+                        </div>
+                    </div>
+                    <div class="footer-content__quicklinks">
+                        <h4>Location</h4>
+                        <div class="footer-content__quicklinks-links">
+                            <a href="#">Greater Noida, Sec-1, India</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-main__baselimk">
+                    <div class="footer-content__baselinks-sociallinks">
+                        <p>Connect with us</p>
+                        <div>
+                            <a href="#">
+                                <img
+                                    src="assets/akar-icons_facebook-fill.png"
+                                    alt="social link"
+                                />
+                            </a>
+                            <a href="#">
+                                <img
+                                    src="assets/entypo-social_linkedin-with-circle.png"
+                                    alt="social link"
+                                />
+                            </a>
+                            <a href="#">
+                                <img
+                                    src="assets/entypo-social_twitter-with-circle.png"
+                                    alt="social link"
+                                />
+                            </a>
+                            <a href="#">
+                                <img
+                                    src="assets/entypo-social_youtube-with-circle.png"
+                                    alt="social link"
+                                />
+                            </a>
+                            <a href="#">
+                                <img
+                                    src="assets/bxl_instagram-alt.png"
+                                    alt="social link"
+                                />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-main__baselimk-payment">
+                        <a href="#">
+                            <img
+                                src="assets/payment-method-visa.png"
+                                alt="visa"
+                            />
+                        </a>
+                        <a href="#">
+                            <img
+                                src="assets/payment-method-mastercard.png"
+                                alt="mastercard"
+                            />
+                        </a>
+                        <a href="#">
+                            <img
+                                src="assets/payment-method-american-express.png"
+                                alt="american express"
+                            />
+                        </a>
+                        <a href="#">
+                            <img
+                                src="assets/payment-method-paypal.png"
+                                alt="paypal"
+                            />
+                        </a>
+                        <a href="#">
+                            <img
+                                src="assets/payment-method-apple-pay.png"
+                                alt="applepay"
+                            />
+                        </a>
+                        <a href="#">
+                            <img
+                                src="assets/payment-method-google-pay.png"
+                                alt="googlepay"
+                            />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <script src="js/script.js"></script>
+        <script>
+            AOS.init();
+        </script>
     </body>
 </html>
