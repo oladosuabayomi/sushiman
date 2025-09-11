@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
 
-    height: 80vh;
+ 
 }
 
 .hero__bg-leaf__right {
@@ -55,33 +55,6 @@
     color: var(--secondary-color);
 
     margin: 16px 0;
-}
-
-.hero-content__order-button {
-    background: var(--primary-color);
-    color: var(--color-white);
-
-    border: none;
-    border-radius: 30px;
-
-    padding: 15px 18px;
-
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    justify-content: space-between;
-
-    cursor: pointer;
-}
-
-.hero-content__order-button:hover {
-    transform: scale(1.02);
-}
-
-.hero-content__order-button img {
-    width: 10px;
-    height: 10px;
-    object-fit: contain;
 }
 
 .hero-image img {
