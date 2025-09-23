@@ -1,217 +1,392 @@
-/* Populae dishes with carousel effect  */
+/* Popular dishes with modern carousel design */
 
 .popular {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: var(--space-12);
+    padding: var(--space-4) 0;
 }
+
 .popular-heading {
     text-align: center;
-
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: var(--space-4);
+    max-width: 600px;
 }
 
 .popular-container {
     position: relative;
-    width: 90%;
+    width: 100%;
+    max-width: 1200px; /* Prevent extending to full page width */
+    margin: 0 auto; /* Center the container */
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 var(--space-8);
 }
 
 .popular-dishes {
     width: 100%;
     overflow-x: auto;
-    padding: 65px 60px 20px 60px; /* Added horizontal padding to prevent cutoff */
+    padding: var(--space-16) var(--space-12) var(--space-8);
 
     display: flex;
-    gap: 3em; /* Increased gap between cards */
-    justify-content: flex-start; /* Start from left for scrolling */
+    gap: var(--space-8);
+    justify-content: flex-start;
 
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
+
+    /* Hide scrollbar */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .popular-dishes::-webkit-scrollbar {
     display: none;
 }
 
+/* Modern Card Design */
+.popular-dishes__card {
+    scroll-snap-align: start;
+
+    background: var(--color-white);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-16) var(--space-10) var(--space-8);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    min-width: 300px;
+    max-width: 320px;
+    min-height: 380px;
+
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+    transition: all var(--transition-slow);
+
+    /* Subtle gradient overlay */
+    background: linear-gradient(
+        145deg,
+        var(--color-white) 0%,
+        var(--gray-50) 100%
+    );
+
+    /* Add smooth hover animation */
+    transform: translateY(0);
+    cursor: pointer;
+}
+
+.popular-dishes__card:hover {
+    transform: translateY(-12px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-200);
+    background: linear-gradient(
+        145deg,
+        var(--color-white) 0%,
+        var(--primary-50) 100%
+    );
+}
+
+.popular-dishes__card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        var(--primary-500) 0%,
+        var(--primary-600) 100%
+    );
+    border-radius: var(--radius-2xl);
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+    z-index: 0;
+}
+
+.popular-dishes__card:hover::before {
+    opacity: 0.03;
+}
+
+.popular-dishes__card-img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+
+    position: absolute;
+    top: -90px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+
+    /* Enhanced image styling */
+    border: 4px solid var(--color-white);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-slow);
+
+    /* Add subtle filter effects */
+    filter: brightness(1) saturate(1.1);
+}
+
+.popular-dishes__card:hover .popular-dishes__card-img {
+    transform: translateX(-50%) scale(1.08) rotate(-2deg);
+    box-shadow: var(--shadow-xl);
+    filter: brightness(1.05) saturate(1.2);
+    border-color: var(--primary-100);
+}
+
+.popular-dishes__card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    width: 100%;
+    margin-top: var(--space-8);
+}
+
+.popular-dishes__card-desc {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.popular-dishes__dish-name {
+    font-family: var(--font-display);
+    font-weight: var(--font-semibold);
+    font-size: var(--text-2xl);
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.popular-dishes__dish-origin {
+    font-family: var(--font-body);
+    font-weight: var(--font-normal);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.popular-dishes__dish-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-4) var(--space-6);
+    background: var(--primary-50);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--primary-200);
+    margin-top: var(--space-4);
+    transition: all var(--transition-base);
+    position: relative;
+    z-index: 1;
+}
+
+.popular-dishes__card:hover .popular-dishes__dish-price {
+    background: var(--primary-100);
+    border-color: var(--primary-300);
+}
+
+.popular-dishes__dish-price p {
+    font-family: var(--font-primary);
+    font-weight: var(--font-bold);
+    font-size: var(--text-xl);
+    color: var(--primary-700);
+    margin: 0;
+    transition: color var(--transition-base);
+}
+
+.popular-dishes__card:hover .popular-dishes__dish-price p {
+    color: var(--primary-800);
+}
+
+.popular-dishes__dish-price img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    padding: var(--space-2);
+    background: var(--primary-500);
+    border-radius: var(--radius-base);
+}
+
+.popular-dishes__dish-price img:hover {
+    transform: scale(1.1) rotate(10deg);
+    background: var(--primary-600);
+    box-shadow: var(--shadow-md);
+}
+
+.popular-dishes__dish-price img:active {
+    transform: scale(0.95);
+}
+/* Modern Scroll Buttons */
 .popular-scroll-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 
     background: var(--color-white);
-    border: 2px solid var(--primary-color);
-    border-radius: 50%;
+    border: 2px solid var(--primary-300);
+    border-radius: var(--radius-full);
 
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    color: var(--primary-color);
+    color: var(--primary-500);
     cursor: pointer;
 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
     transition: all 0.3s ease;
 
     z-index: 10;
 }
 
 .popular-scroll-btn:hover {
-    background: var(--primary-color);
+    background: var(--primary-500);
     color: var(--color-white);
-    transform: translateY(-50%) scale(1.1);
+    border-color: var(--primary-500);
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: var(--shadow-lg);
 }
 
 .popular-scroll-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
-    transform: translateY(-50%) scale(1);
+    transform: translateY(-50%);
+    background: var(--gray-100);
+    border-color: var(--gray-200);
+    color: var(--gray-400);
 }
 
 .popular-scroll-btn--left {
-    left: -25px;
+    left: var(--space-4);
 }
 
 .popular-scroll-btn--right {
-    right: -25px;
-}
-
-.popular-dishes__card-content {
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    gap: 40px; /* Increased gap between content elements */
-
-    width: 100%;
-}
-
-.popular-dishes__card {
-    scroll-snap-align: start;
-    background: var(--primary-color);
-    background: linear-gradient(
-        180deg,
-        rgba(255, 143, 30, 1) 0%,
-        rgba(166, 6, 0, 1) 100%
-    );
-    box-shadow: 0px 8px 90px -39px rgba(0, 0, 0, 0.9);
-
-    border-radius: 30px;
-    padding: 100px 30px 40px; /* Increased padding for more height */
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-
-    position: relative; /* For absolutely positioned image */
-    min-width: 400px;
-    min-height: 340px; /* Added minimum height for consistency */
-}
-
-.popular-dishes__card-img {
-    width: 260px; /* Increased image size for more visual impact */
-    position: absolute;
-    top: -70px; /* Adjusted for larger image */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-}
-
-.popular-dishes__card-desc {
-    text-align: center;
-    margin-bottom: 20px; /* Add space between description and price */
-}
-
-.popular-dishes__dish-name {
-    font-family: var(--koh-santepheap);
-    font-weight: 600;
-    font-size: 28px;
-
-    color: var(--color-white);
-}
-.popular-dishes__dish-origin {
-    font-family: var(--poppins);
-    font-weight: 300;
-    font-size: 16px;
-
-    color: var(--color-white);
-    opacity: 0.6;
-}
-
-.popular-dishes__dish-price {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.popular-dishes__dish-price p {
-    font-family: var(--koh-santepheap);
-    font-weight: 600;
-    font-size: 24px;
-
-    color: var(--color-white);
-}
-
-.popular-dishes__dish-price img {
-    background: var(--secondary-color);
-    padding: 10px;
-
-    border-radius: 50%;
+    right: var(--space-4);
 }
 
 /* Responsive design for different screen sizes */
 @media (max-width: 900px) {
     .popular-dishes {
-        justify-content: flex-start;
-        padding: 120px 40px 20px 40px; /* Ensure padding on mobile too */
-        gap: 1.5rem;
+        padding: var(--space-20) var(--space-8) var(--space-8);
+        gap: var(--space-6);
     }
 
     .popular-dishes__card {
-        min-width: 320px;
-        padding: 70px 18px 18px;
+        min-width: 280px;
+        padding: var(--space-12) var(--space-5) var(--space-6);
     }
 
     .popular-dishes__card-img {
-        width: 220px;
-        top: -60px;
+        width: 160px;
+        height: 160px;
+        top: -80px;
     }
 
     .popular-scroll-btn {
         width: 40px;
         height: 40px;
-        display: var(--buttons-display, flex);
-    }
-
-    .popular-scroll-btn--left {
-        left: -20px;
-    }
-
-    .popular-scroll-btn--right {
-        right: -20px;
     }
 }
 
-@media (max-width: 480px) {
+/* Tablet and smaller screens - show 2 cards */
+@media (max-width: 768px) {
     .popular-dishes {
-        padding: 120px 20px 20px 20px; /* Minimal padding on very small screens */
+        gap: var(--space-4);
+        justify-content: center;
+        padding: var(--space-16) var(--space-6) var(--space-6);
     }
 
-    .popular-scroll-btn--left {
-        left: 10px;
+    .popular-dishes__card {
+        min-width: calc(50vw - var(--space-12));
+        max-width: 280px;
+        scroll-snap-align: start;
+    }
+}
+
+/* Mobile screens - show 1 card at a time */
+
+@media (max-width: 480px) {
+    .popular {
+        gap: var(--space-8);
     }
 
-    .popular-scroll-btn--right {
-        right: 10px;
+    .popular-dishes {
+        padding: var(--space-16) var(--space-6) var(--space-6);
+        /* Center cards and show one at a time */
+        justify-content: flex-start;
+        scroll-snap-type: x mandatory;
+        gap: var(--space-6);
+    }
+
+    .popular-dishes__card {
+        /* Make cards fit properly within container */
+        min-width: calc(100vw - var(--space-12));
+        max-width: 280px;
+        padding: var(--space-10) var(--space-4) var(--space-5);
+        scroll-snap-align: center;
+        flex-shrink: 0;
+    }
+
+    /* Ensure first card is properly positioned */
+    .popular-dishes__card:first-child {
+        margin-left: 0;
+    }
+
+    .popular-dishes__card-img {
+        width: 140px;
+        height: 140px;
+        top: -70px;
+    }
+
+    .popular-dishes__dish-name {
+        font-size: var(--text-xl);
+    }
+
+    .popular-scroll-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 350px) {
+    .popular-dishes {
+        padding: var(--space-16) var(--space-4) var(--space-6);
+        gap: var(--space-4);
+    }
+
+    .popular-dishes__card {
+        min-width: calc(100vw - var(--space-8));
+        max-width: 260px;
+    }
+
+    .popular-dishes__card-img {
+        width: 120px;
+        height: 120px;
+        top: -60px;
+    }
+
+    .popular-dishes__dish-name {
+        font-size: var(--text-lg);
+    }
+
+    .popular-dishes__dish-price p {
+        font-size: var(--text-lg);
     }
 }

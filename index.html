@@ -4,23 +4,72 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="assets/logo.png" type="image/png" />
+
+        <!-- Preload critical assets -->
+        <link rel="preload" href="assets/logo.png" as="image" />
+        <link
+            rel="preload"
+            href="assets/popular-sushi-rolls 1.png"
+            as="image"
+        />
+
+        <!-- AOS Animation Library -->
         <link
             href="https://unpkg.com/aos@2.3.1/dist/aos.css"
             rel="stylesheet"
         />
 
+        <!-- Critical CSS -->
         <link rel="stylesheet" href="css/style.css" />
-        <title>Sushiman</title>
+
+        <!-- SEO Meta Tags -->
+        <meta
+            name="description"
+            content="Enjoy delicious sushi and Japanese cuisine at Sushiman. Fresh ingredients, traditional recipes, and modern presentation."
+        />
+        <meta
+            name="keywords"
+            content="sushi, japanese food, restaurant, fresh fish, sashimi, rolls"
+        />
+        <meta name="author" content="Sushiman Restaurant" />
+
+        <!-- Open Graph Tags -->
+        <meta
+            property="og:title"
+            content="Sushiman - Authentic Japanese Sushi Restaurant"
+        />
+        <meta
+            property="og:description"
+            content="Experience the finest sushi and Japanese cuisine with fresh ingredients and traditional preparation."
+        />
+        <meta property="og:image" content="assets/popular-sushi-rolls 1.png" />
+        <meta property="og:type" content="website" />
+
+        <title>Sushiman - Authentic Japanese Sushi Restaurant</title>
     </head>
     <body>
-        <header class="width-80-container">
-            <nav class="header__nav">
+        <header
+            class="width-80-container"
+            data-aos="fade-down"
+            data-aos-duration="800"
+        >
+            <nav class="header__nav" role="navigation" aria-label="Main">
                 <div class="header__logo">
-                    <img src="assets/logo.png" alt="logo" />
-                    <p class="header__logo-text">Shushi</p>
+                    <img src="assets/logo.png" alt="Sushiman logo" />
+                    <p class="header__logo-text">Sushi</p>
                 </div>
-                <!-- nav for large screen -->
-                <ul class="header__menu">
+                <button
+                    class="header__toggle"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="headerMenu"
+                >
+                    <span class="header__toggle-bar"></span>
+                    <span class="header__toggle-bar"></span>
+                    <span class="header__toggle-bar"></span>
+                </button>
+                <!-- Primary nav menu -->
+                <ul class="header__menu" id="headerMenu">
                     <li class="header__menu-active">
                         <a href="#home">Home</a>
                     </li>
@@ -34,83 +83,155 @@
                         <a href="#recent">Recently</a>
                     </li>
                 </ul>
+                <div class="header__overlay" data-close-nav></div>
             </nav>
         </header>
 
-        <section class="hero">
-            <div class="hero__bg-leaf__right">
-                <img src="assets/leaf-branch-2 1.png" alt="leaf branch" />
+        <section class="hero" id="home">
+            <div
+                class="hero__bg-leaf__right"
+                data-aos="fade-down"
+                data-aos-delay="200"
+            >
+                <img
+                    src="assets/leaf-branch-2 1.png"
+                    alt="Decorative leaf branch"
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                />
             </div>
-            <div class="hero__bg-leaf__left">
-                <img src="assets/leaf-branch-4 1.png" alt="leaf branch" />
+            <div
+                class="hero__bg-leaf__left"
+                data-aos="fade-up"
+                data-aos-delay="300"
+            >
+                <img
+                    src="assets/leaf-branch-4 1.png"
+                    alt="Decorative leaf branch"
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                />
             </div>
             <div class="hero-content width-80-container">
-                <div class="hero-content__left">
+                <div
+                    class="hero-content__left"
+                    data-aos="fade-right"
+                    data-aos-duration="900"
+                >
                     <h1 class="hero-content__left-heading">
                         Enjoy Delicious <br />
                         <span>
                             <img
                                 src="assets/home-sushi-title 1.png"
-                                alt="sushi"
+                                alt="Sushi icon"
+                                loading="lazy"
+                                decoding="async"
                             />
                             Sushi Food
                         </span>
                     </h1>
                     <p>
                         Enjoy a good dinner with the best dishes in the
-                        restourant and improve your day.
+                        restaurant and improve your day.
                     </p>
                     <div class="hero-content__button">
-                        <button class="hero-content__order-button btn-primary">
+                        <button
+                            class="hero-content__order-button btn btn-primary"
+                            data-aos="zoom-in"
+                            data-aos-delay="150"
+                        >
                             Order Now
                             <img src="assets/arrow-right.png" alt="" />
                         </button>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <img src="assets/popular-sushi-rolls 1.png" alt="" />
+                <div
+                    class="hero-image"
+                    data-aos="fade-left"
+                    data-aos-duration="1000"
+                >
+                    <img
+                        src="assets/popular-sushi-rolls 1.png"
+                        alt="Featured sushi assortment"
+                        fetchpriority="high"
+                        decoding="async"
+                    />
                 </div>
             </div>
         </section>
 
-        <section class="about section-spacing">
+        <section
+            class="about section-spacing"
+            id="about-us"
+            data-aos="fade-up"
+            data-aos-duration="900"
+        >
             <div class="about-content width-80-container">
-                <div class="about-image">
-                    <img src="assets/about-sushi 1.png" alt="sushi" />
+                <div
+                    class="about-image"
+                    data-aos="fade-right"
+                    data-aos-delay="120"
+                >
+                    <img
+                        src="assets/about-sushi 1.png"
+                        alt="Assorted sushi platter"
+                        loading="lazy"
+                        decoding="async"
+                    />
                 </div>
-                <div class="about-content__right">
+                <div
+                    class="about-content__right"
+                    data-aos="fade-left"
+                    data-aos-delay="220"
+                >
                     <h3 class="section__title">About us</h3>
                     <h2 class="section__subtitle">
                         <span class="about-content__subtitle--image">
                             We Provide
                             <img
                                 src="assets/about-sushi-title 1.png"
-                                alt="sushi"
+                                alt="Decorative sushi icon"
+                                loading="lazy"
+                                decoding="async"
                         /></span>
                         Healthy Food
                     </h2>
                     <p>
                         Food comes to us from our relatives whether they have
-                        wings or roots . This is how we consider food. It also
+                        wings or roots. This is how we consider food. It also
                         has a culture. It has a history that passes from
-                        generation to genneration.
+                        generation to generation.
                     </p>
                 </div>
             </div>
             <div class="about__bg-leaf">
-                <img src="assets/leaf-branch-1 1.png" alt="leaf branch" />
+                <img
+                    src="assets/leaf-branch-1 1.png"
+                    alt="leaf branch"
+                    loading="lazy"
+                    decoding="async"
+                />
             </div>
         </section>
 
-        <section class="popular section-spacing">
-            <div class="popular-heading">
+        <section
+            class="popular section-spacing"
+            id="popular"
+            data-aos="fade-up"
+            data-aos-duration="900"
+        >
+            <div class="popular-heading" data-aos="fade-up" data-aos-delay="80">
                 <h3 class="section__title">The Best Food</h3>
-                <h2 class="section__subtitle">Popular DIshes</h2>
+                <h2 class="section__subtitle">Popular Dishes</h2>
             </div>
             <div class="popular-container">
                 <button
                     class="popular-scroll-btn popular-scroll-btn--left"
                     id="scrollLeft"
+                    aria-label="Scroll popular dishes left"
+                    aria-controls="popularDishes"
                 >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path
@@ -122,17 +243,29 @@
                         />
                     </svg>
                 </button>
-                <div class="popular-dishes" id="popularDishes">
-                    <div class="popular-dishes__card">
+                <div
+                    class="popular-dishes"
+                    id="popularDishes"
+                    role="region"
+                    aria-roledescription="carousel"
+                    aria-label="Popular dishes"
+                >
+                    <div
+                        class="popular-dishes__card"
+                        data-aos="fade-up"
+                        data-aos-delay="0"
+                    >
                         <img
                             class="popular-dishes__card-img"
                             src="assets/home-sushi-rolls 1.png"
                             alt="sushi"
+                            loading="lazy"
+                            decoding="async"
                         />
                         <div class="popular-dishes__card-content">
                             <div class="popular-dishes__card-desc">
                                 <h3 class="popular-dishes__dish-name">
-                                    Onrigi
+                                    Onigiri
                                 </h3>
                                 <p class="popular-dishes__dish-origin">
                                     Japanese Dish
@@ -143,16 +276,24 @@
                                 <img
                                     src="assets/shopping-bag.png"
                                     alt="shopping bag"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </div>
                         </div>
                     </div>
 
-                    <div class="popular-dishes__card">
+                    <div
+                        class="popular-dishes__card"
+                        data-aos="fade-up"
+                        data-aos-delay="100"
+                    >
                         <img
                             class="popular-dishes__card-img"
                             src="assets/popular-spring-rols 1.png"
                             alt="sushi"
+                            loading="lazy"
+                            decoding="async"
                         />
                         <div class="popular-dishes__card-content">
                             <div class="popular-dishes__card-desc">
@@ -168,15 +309,23 @@
                                 <img
                                     src="assets/shopping-bag.png"
                                     alt="shopping bag"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </div>
                         </div>
                     </div>
-                    <div class="popular-dishes__card">
+                    <div
+                        class="popular-dishes__card"
+                        data-aos="fade-up"
+                        data-aos-delay="200"
+                    >
                         <img
                             class="popular-dishes__card-img"
                             src="assets/home-sushi-rolls 1.png"
                             alt="sushi"
+                            loading="lazy"
+                            decoding="async"
                         />
                         <div class="popular-dishes__card-content">
                             <div class="popular-dishes__card-desc">
@@ -190,15 +339,23 @@
                                 <img
                                     src="assets/shopping-bag.png"
                                     alt="shopping bag"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </div>
                         </div>
                     </div>
-                    <div class="popular-dishes__card">
+                    <div
+                        class="popular-dishes__card"
+                        data-aos="fade-up"
+                        data-aos-delay="300"
+                    >
                         <img
                             class="popular-dishes__card-img"
                             src="assets/popular-spring-rols 1.png"
                             alt="sushi"
+                            loading="lazy"
+                            decoding="async"
                         />
                         <div class="popular-dishes__card-content">
                             <div class="popular-dishes__card-desc">
@@ -212,6 +369,8 @@
                                 <img
                                     src="assets/shopping-bag.png"
                                     alt="shopping bag"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </div>
                         </div>
@@ -220,6 +379,8 @@
                 <button
                     class="popular-scroll-btn popular-scroll-btn--right"
                     id="scrollRight"
+                    aria-label="Scroll popular dishes right"
+                    aria-controls="popularDishes"
                 >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path
@@ -234,88 +395,132 @@
             </div>
         </section>
 
-        <section class="recent section-spacing">
+        <section class="recent section-spacing" id="recent" data-aos="fade-up">
             <div class="recent-content width-80-container">
-                <div class="recent-content__left">
+                <div
+                    class="recent-content__left"
+                    data-aos="fade-right"
+                    data-aos-delay="120"
+                >
                     <h3 class="section__title">Recently Added</h3>
                     <h2 class="section__subtitle">
                         <span class="recent-content__subtitle--image">
                             Sushi Samurai
-                            <img src="assets/spinach-leaf 1.png" alt="sushi"
-                        /></span>
-                        Salmorn Cheese
+                            <img
+                                src="assets/spinach-leaf 1.png"
+                                alt="Leaf icon"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </span>
+                        Salmon Cheese
                     </h2>
                     <p>
-                        Take a look at what’s new . And do not depreve yourself
-                        of a good meal, enjoy and be happy.
+                        Take a look at what’s new. And do not deprive yourself
+                        of a good meal—enjoy and be happy.
                     </p>
                     <div class="recent-content__button">
                         <button
-                            class="recent-content__order-button btn-primary"
+                            class="recent-content__order-button btn btn-primary"
+                            data-aos="zoom-in"
+                            data-aos-delay="260"
                         >
                             Order Now
                             <img src="assets/arrow-right.png" alt="" />
                         </button>
                     </div>
                 </div>
-                <div class="recent-image">
-                    <img src="assets/recently-salmon-sushi 1.png" alt="sushi" />
+                <div
+                    class="recent-image"
+                    data-aos="fade-left"
+                    data-aos-delay="200"
+                >
+                    <img
+                        src="assets/recently-salmon-sushi 1.png"
+                        alt="Fresh salmon sushi with cheese"
+                        loading="lazy"
+                        decoding="async"
+                    />
                 </div>
             </div>
         </section>
 
-        <section class="newsletter section-spacing">
+        <section
+            class="newsletter section-spacing"
+            id="newsletter"
+            data-aos="fade-up"
+        >
             <div class="newsletter-content width-80-container">
                 <img
                     class="newsletter-content__image"
                     src="assets/newsletter-sushi 1.png"
-                    alt="sushi"
+                    alt="Mail subscription sushi graphic"
+                    data-aos="zoom-in"
+                    data-aos-delay="120"
+                    loading="lazy"
+                    decoding="async"
                 />
-                <div class="newsletter-content__section-info">
+                <div
+                    class="newsletter-content__section-info"
+                    data-aos="fade-left"
+                    data-aos-delay="180"
+                >
                     <h3 class="newsletter-content__section-title">
                         Newsletter
                     </h3>
                     <h2 class="newsletter-content__section-subtitle">
-                        Subscribe for latest update
+                        Subscribe for the latest updates
                     </h2>
-                    <button class="newsletter-content__subscribe-button">
+                    <form
+                        class="newsletter-content__subscribe-button"
+                        action="#"
+                        method="post"
+                        onsubmit="event.preventDefault();"
+                    >
                         <input
                             class="newsletter-content__subscribe-button--input"
                             type="email"
+                            name="email"
+                            aria-label="Email address"
                             placeholder="Enter email"
                             required
                         />
-                        <a
+                        <button
+                            type="submit"
                             class="newsletter-content__subscribe-button--subscribe"
-                            href="#"
+                            aria-label="Subscribe"
                         >
-                            subscribe
-                            <img
-                                src="assets/ri_send-plane-fill.png"
-                                alt="subscribe"
-                            />
-                        </a>
-                    </button>
+                            Subscribe
+                            <img src="assets/ri_send-plane-fill.png" alt="" />
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
 
-        <section class="footer section-spacing">
+        <section
+            class="footer section-spacing"
+            id="footer"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+        >
             <div class="footer-main width-80-container">
                 <div class="footer-content width-80-container">
                     <div class="footer-content__footer-about">
                         <div class="footer__logo">
-                            <img src="assets/logo.png" alt="logo" />
-                            <p class="footer__logo-text">Shushi</p>
+                            <img src="assets/logo.png" alt="Sushiman logo" />
+                            <p class="footer__logo-text">Sushi</p>
                         </div>
                         <p>
-                            Food for the body is not enough. There must be foos
+                            Food for the body is not enough. There must be food
                             for the soul.
                         </p>
                         <img
                             class="footer-content__footer-about--leaf"
                             src="assets/spinach-leaf 1.png"
                             alt="leaf"
+                            loading="lazy"
+                            decoding="async"
                         />
                     </div>
                     <div class="footer-content__quicklinks">
@@ -350,31 +555,41 @@
                             <a href="#">
                                 <img
                                     src="assets/akar-icons_facebook-fill.png"
-                                    alt="social link"
+                                    alt="Facebook"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </a>
                             <a href="#">
                                 <img
                                     src="assets/entypo-social_linkedin-with-circle.png"
-                                    alt="social link"
+                                    alt="LinkedIn"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </a>
                             <a href="#">
                                 <img
                                     src="assets/entypo-social_twitter-with-circle.png"
-                                    alt="social link"
+                                    alt="Twitter"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </a>
                             <a href="#">
                                 <img
                                     src="assets/entypo-social_youtube-with-circle.png"
-                                    alt="social link"
+                                    alt="YouTube"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </a>
                             <a href="#">
                                 <img
                                     src="assets/bxl_instagram-alt.png"
-                                    alt="social link"
+                                    alt="Instagram"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </a>
                         </div>
@@ -383,37 +598,49 @@
                         <a href="#">
                             <img
                                 src="assets/payment-method-visa.png"
-                                alt="visa"
+                                alt="Visa"
+                                loading="lazy"
+                                decoding="async"
                             />
                         </a>
                         <a href="#">
                             <img
                                 src="assets/payment-method-mastercard.png"
-                                alt="mastercard"
+                                alt="Mastercard"
+                                loading="lazy"
+                                decoding="async"
                             />
                         </a>
                         <a href="#">
                             <img
                                 src="assets/payment-method-american-express.png"
-                                alt="american express"
+                                alt="American Express"
+                                loading="lazy"
+                                decoding="async"
                             />
                         </a>
                         <a href="#">
                             <img
                                 src="assets/payment-method-paypal.png"
-                                alt="paypal"
+                                alt="PayPal"
+                                loading="lazy"
+                                decoding="async"
                             />
                         </a>
                         <a href="#">
                             <img
                                 src="assets/payment-method-apple-pay.png"
-                                alt="applepay"
+                                alt="Apple Pay"
+                                loading="lazy"
+                                decoding="async"
                             />
                         </a>
                         <a href="#">
                             <img
                                 src="assets/payment-method-google-pay.png"
-                                alt="googlepay"
+                                alt="Google Pay"
+                                loading="lazy"
+                                decoding="async"
                             />
                         </a>
                     </div>
@@ -421,9 +648,14 @@
             </div>
         </section>
 
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script src="js/script.js"></script>
         <script>
-            AOS.init();
+            AOS.init({
+                once: true,
+                offset: 60,
+                easing: "ease-out-cubic",
+            });
         </script>
     </body>
 </html>

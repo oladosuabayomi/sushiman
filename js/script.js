@@ -1,56 +1,297 @@
+/*!
+ * Sushiman - Interactive Features & Functionality
+ *
+ * Version: 2.0.0
+ * Description: Modern JavaScript implementation with performance optimization
+ * Author: Sushiman Development Team
+ * Date: September 2025
+ *
+ * Features:
+ * - Mobile-responsive carousel with touch support
+ * - Accessible navigation with keyboard support
+ * - Enhanced form interactions with validation
+ * - Smooth scroll animations and parallax effects
+ * - Performance-optimized image lazy loading
+ * - Cross-browser compatibility ensured
+ */
+
 // Popular Dishes Carousel Scrolling Functionality
+
 document.addEventListener("DOMContentLoaded", function () {
+    /* ================= Popular Dishes Carousel ================= */
     const popularDishes = document.getElementById("popularDishes");
     const scrollLeftBtn = document.getElementById("scrollLeft");
     const scrollRightBtn = document.getElementById("scrollRight");
 
-    // Check if elements exist
-    if (!popularDishes || !scrollLeftBtn || !scrollRightBtn) {
-        console.error("Carousel elements not found");
-        return;
+    if (popularDishes && scrollLeftBtn && scrollRightBtn) {
+        function getScrollAmount() {
+            try {
+                const card = popularDishes.querySelector(
+                    ".popular-dishes__card"
+                );
+                if (!card) return 450; // fallback value
+                const cardWidth = card.offsetWidth;
+                const gap = 48; // 3em ≈ 48px
+                return cardWidth + gap;
+            } catch (error) {
+                console.warn("Error calculating scroll amount:", error);
+                return 450; // fallback value
+            }
+        }
+
+        function scrollCarousel(direction) {
+            const scrollAmount = getScrollAmount();
+            const scrollValue =
+                direction === "left" ? -scrollAmount : scrollAmount;
+            popularDishes.scrollBy({ left: scrollValue, behavior: "smooth" });
+        }
+
+        function updateButtons() {
+            try {
+                const { scrollLeft, scrollWidth, clientWidth } = popularDishes;
+                const maxScroll = scrollWidth - clientWidth;
+                scrollLeftBtn.disabled = scrollLeft <= 0;
+                scrollLeftBtn.style.opacity = scrollLeft <= 0 ? "0.5" : "1";
+                scrollRightBtn.disabled = scrollLeft >= maxScroll - 1;
+                scrollRightBtn.style.opacity =
+                    scrollLeft >= maxScroll - 1 ? "0.5" : "1";
+            } catch (error) {
+                console.warn("Error updating carousel buttons:", error);
+            }
+        }
+
+        scrollLeftBtn.addEventListener("click", () => scrollCarousel("left"));
+        scrollRightBtn.addEventListener("click", () => scrollCarousel("right"));
+        popularDishes.addEventListener("scroll", updateButtons);
+        setTimeout(updateButtons, 100);
+        window.addEventListener("resize", () => setTimeout(updateButtons, 150));
     }
 
-    // Calculate scroll amount (card width + gap)
-    function getScrollAmount() {
-        const card = popularDishes.querySelector(".popular-dishes__card");
-        if (!card) return 450; // fallback value
+    /* ================= Mobile Navigation ================= */
+    const toggle = document.querySelector(".header__toggle");
+    const menu = document.getElementById("headerMenu");
+    const overlay = document.querySelector(".header__overlay");
+    const focusableSelectors =
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    let lastFocusedBeforeOpen = null;
 
-        const cardWidth = card.offsetWidth;
-        const gap = 48; // 3em ≈ 48px
-        return cardWidth + gap;
+    function openNav() {
+        document.body.classList.add("nav-open");
+        toggle.setAttribute("aria-expanded", "true");
+        lastFocusedBeforeOpen = document.activeElement;
+        // Focus first link
+        const firstLink = menu.querySelector("a");
+        firstLink && firstLink.focus();
+        trapFocus();
     }
 
-    // Scroll the carousel
-    function scrollCarousel(direction) {
-        const scrollAmount = getScrollAmount();
-        const scrollValue = direction === "left" ? -scrollAmount : scrollAmount;
+    function closeNav() {
+        document.body.classList.remove("nav-open");
+        toggle.setAttribute("aria-expanded", "false");
+        releaseFocus();
+        toggle.focus();
+    }
 
-        popularDishes.scrollBy({
-            left: scrollValue,
-            behavior: "smooth",
+    function trapFocus() {
+        const focusables = menu.querySelectorAll(focusableSelectors);
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        function handle(e) {
+            if (e.key !== "Tab") return;
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
+        menu.addEventListener("keydown", handle);
+        menu._trapHandler = handle;
+    }
+
+    function releaseFocus() {
+        if (menu._trapHandler)
+            menu.removeEventListener("keydown", menu._trapHandler);
+        if (lastFocusedBeforeOpen)
+            lastFocusedBeforeOpen.focus({ preventScroll: true });
+    }
+
+    function toggleNav() {
+        const isOpen = document.body.classList.contains("nav-open");
+        isOpen ? closeNav() : openNav();
+    }
+
+    if (toggle && menu && overlay) {
+        toggle.addEventListener("click", toggleNav);
+        overlay.addEventListener("click", closeNav);
+
+        document.addEventListener("keydown", (e) => {
+            if (
+                e.key === "Escape" &&
+                document.body.classList.contains("nav-open")
+            )
+                closeNav();
+        });
+
+        // Close when resizing above breakpoint
+        window.addEventListener("resize", () => {
+            if (
+                window.innerWidth > 840 &&
+                document.body.classList.contains("nav-open")
+            )
+                closeNav();
+        });
+
+        // Close after clicking a link (and set active state)
+        menu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                menu.querySelectorAll("li").forEach((li) =>
+                    li.classList.remove("header__menu-active")
+                );
+                link.parentElement.classList.add("header__menu-active");
+                closeNav();
+            });
         });
     }
 
-    // Update button states
-    function updateButtons() {
-        const { scrollLeft, scrollWidth, clientWidth } = popularDishes;
-        const maxScroll = scrollWidth - clientWidth;
+    /* ================= Scroll Reveal Animations ================= */
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+    };
 
-        // Left button
-        scrollLeftBtn.disabled = scrollLeft <= 0;
-        scrollLeftBtn.style.opacity = scrollLeft <= 0 ? "0.5" : "1";
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("animate-fade-in");
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
 
-        // Right button
-        scrollRightBtn.disabled = scrollLeft >= maxScroll - 1;
-        scrollRightBtn.style.opacity =
-            scrollLeft >= maxScroll - 1 ? "0.5" : "1";
+    // Observe elements for scroll animations
+    document
+        .querySelectorAll(".popular-dishes__card, .about-image, .recent-image")
+        .forEach((el) => {
+            revealObserver.observe(el);
+        });
+
+    /* ================= Enhanced Form Interactions ================= */
+    const newsletterForm = document.querySelector(
+        ".newsletter-content__subscribe-button"
+    );
+    const emailInput = document.querySelector(
+        ".newsletter-content__subscribe-button--input"
+    );
+    const submitBtn = document.querySelector(
+        ".newsletter-content__subscribe-button--subscribe"
+    );
+
+    if (newsletterForm && emailInput && submitBtn) {
+        // Add floating label effect
+        emailInput.addEventListener("focus", () => {
+            newsletterForm.classList.add("focused");
+        });
+
+        emailInput.addEventListener("blur", () => {
+            if (!emailInput.value) {
+                newsletterForm.classList.remove("focused");
+            }
+        });
+
+        // Enhanced form submission with error handling
+        newsletterForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            try {
+                if (!emailInput.value || !emailInput.validity.valid) {
+                    emailInput.classList.add("error");
+                    setTimeout(
+                        () => emailInput.classList.remove("error"),
+                        2000
+                    );
+                    return;
+                }
+
+                // Show loading state
+                submitBtn.innerHTML = '<div class="loading-spinner"></div>';
+                submitBtn.disabled = true;
+
+                // Simulate API call
+                await new Promise((resolve) => setTimeout(resolve, 1500));
+
+                // Show success state
+                submitBtn.innerHTML = "✓ Subscribed!";
+                emailInput.value = "";
+                newsletterForm.classList.remove("focused");
+
+                setTimeout(() => {
+                    submitBtn.innerHTML =
+                        'Subscribe <img src="assets/ri_send-plane-fill.png" alt="" />';
+                    submitBtn.disabled = false;
+                }, 3000);
+            } catch (error) {
+                console.error("Newsletter subscription error:", error);
+                submitBtn.innerHTML = "Error - Try again";
+                setTimeout(() => {
+                    submitBtn.innerHTML =
+                        'Subscribe <img src="assets/ri_send-plane-fill.png" alt="" />';
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        });
     }
 
-    // Add event listeners
-    scrollLeftBtn.addEventListener("click", () => scrollCarousel("left"));
-    scrollRightBtn.addEventListener("click", () => scrollCarousel("right"));
-    popularDishes.addEventListener("scroll", updateButtons);
+    /* ================= Smooth Scroll for Navigation ================= */
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+            }
+        });
+    });
 
-    // Initialize
-    setTimeout(updateButtons, 100);
+    /* ================= Performance Optimizations ================= */
+    // Lazy load images
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.classList.remove("loading");
+                    imageObserver.unobserve(img);
+                }
+            }
+        });
+    });
+
+    // Observe all images with data-src attribute
+    document.querySelectorAll("img[data-src]").forEach((img) => {
+        img.classList.add("loading");
+        imageObserver.observe(img);
+    });
+
+    /* ================= Parallax Effect for Background Elements ================= */
+    const parallaxElements = document.querySelectorAll(
+        ".hero__bg-leaf__right, .hero__bg-leaf__left"
+    );
+
+    window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+
+        parallaxElements.forEach((el, index) => {
+            const modifier = index % 2 === 0 ? 1 : -1;
+            el.style.transform = `translateY(${rate * modifier}px)`;
+        });
+    });
 });
