@@ -163,6 +163,7 @@ body {
     font-weight: var(--font-normal);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 a {
@@ -747,6 +748,8 @@ img:not(.loading) {
 
     .width-80-container {
         padding: 0 var(--space-2);
+        width: 100%; /* Ensure full width on mobile */
+        max-width: 100%; /* Prevent overflow */
     }
 }
 

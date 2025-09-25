@@ -125,7 +125,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (toggle && menu && overlay) {
-        toggle.addEventListener("click", toggleNav);
+        // Ensure proper event handling on all devices
+        toggle.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleNav();
+        });
+        toggle.addEventListener(
+            "touchstart",
+            (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleNav();
+            },
+            { passive: false }
+        );
         overlay.addEventListener("click", closeNav);
 
         document.addEventListener("keydown", (e) => {

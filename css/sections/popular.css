@@ -30,7 +30,7 @@
 .popular-dishes {
     width: 100%;
     overflow-x: auto;
-    padding: var(--space-16) var(--space-12) var(--space-8);
+    padding: var(--space-20) var(--space-12) var(--space-8); /* Increased top padding */
 
     display: flex;
     gap: var(--space-8);
@@ -310,11 +310,11 @@
     .popular-dishes {
         gap: var(--space-4);
         justify-content: center;
-        padding: var(--space-16) var(--space-6) var(--space-6);
+        padding: var(--space-20) var(--space-6) var(--space-6); /* Increased top padding */
     }
 
     .popular-dishes__card {
-        min-width: calc(50vw - var(--space-12));
+        min-width: 280px; /* Fixed width instead of viewport calculation */
         max-width: 280px;
         scroll-snap-align: start;
     }
@@ -325,20 +325,28 @@
 @media (max-width: 480px) {
     .popular {
         gap: var(--space-8);
+        padding: 0 var(--space-4); /* Add container padding */
+    }
+
+    .popular-container {
+        padding: 0; /* Remove extra padding that causes overflow */
     }
 
     .popular-dishes {
-        padding: var(--space-16) var(--space-6) var(--space-6);
+        padding: var(--space-20) var(--space-4) var(--space-6); /* Increased top padding */
         /* Center cards and show one at a time */
         justify-content: flex-start;
         scroll-snap-type: x mandatory;
-        gap: var(--space-6);
+        gap: var(--space-4); /* Reduced gap */
+        width: 100%;
+        overflow-x: auto;
     }
 
     .popular-dishes__card {
-        /* Make cards fit properly within container */
-        min-width: calc(100vw - var(--space-12));
+        /* Make cards fit properly within container without causing overflow */
+        min-width: 280px; /* Fixed width instead of viewport calculation */
         max-width: 280px;
+        width: 280px; /* Consistent width */
         padding: var(--space-10) var(--space-4) var(--space-5);
         scroll-snap-align: center;
         flex-shrink: 0;
@@ -367,13 +375,14 @@
 
 @media (max-width: 350px) {
     .popular-dishes {
-        padding: var(--space-16) var(--space-4) var(--space-6);
-        gap: var(--space-4);
+        padding: var(--space-20) var(--space-2) var(--space-6); /* Increased top padding */
+        gap: var(--space-3); /* Reduced gap */
     }
 
     .popular-dishes__card {
-        min-width: calc(100vw - var(--space-8));
-        max-width: 260px;
+        min-width: 250px; /* Fixed width to prevent overflow */
+        max-width: 250px;
+        width: 250px;
     }
 
     .popular-dishes__card-img {

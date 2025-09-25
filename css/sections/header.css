@@ -16,19 +16,21 @@ header {
         width: 100% !important;
         max-width: none !important;
         margin: 0 !important;
-        padding: 0 var(--space-4);
+        padding: 0 var(--space-6); /* Increased padding from edges */
         background: var(--color-bg);
         z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Add subtle shadow */
     }
 
     .header__nav {
-        margin: var(--space-4) 0;
+        margin: var(--space-5) 0; /* Increased vertical margin */
         width: 100%;
+        padding: 0 var(--space-2); /* Add internal padding */
     }
 
     /* Add top padding to body to account for fixed header */
     body {
-        padding-top: 88px; /* Approximate header height */
+        padding-top: 100px; /* Increased to accommodate larger header */
     }
 }
 
@@ -92,6 +94,7 @@ header {
     display: none;
     flex-direction: column;
     justify-content: center;
+    align-items: center; /* Ensure proper alignment */
     gap: var(--space-1);
     width: 48px;
     height: 48px;
@@ -103,6 +106,7 @@ header {
     transition: all 0.3s ease;
     box-shadow: var(--shadow-base);
     z-index: 101;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .header__toggle:hover {
@@ -140,7 +144,6 @@ header {
     transition: all 0.4s ease;
     backdrop-filter: blur(4px);
     z-index: 98;
-
 }
 
 /* Off-canvas panel setup */
@@ -189,7 +192,6 @@ header {
         width: 100%;
     }
 
- 
     .header__menu a:hover,
     .header__menu a:focus-visible {
         background: rgba(255, 143, 30, 0.1);

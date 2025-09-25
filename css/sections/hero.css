@@ -162,8 +162,13 @@
 }
 
 @media (max-width: 560px) {
+    .hero {
+        overflow: hidden; /* Ensure no overflow */
+        padding: var(--space-4) 0; /* Reduce padding on mobile */
+    }
     .hero-content {
         padding-top: 18px;
+        width: 100%; /* Ensure full width usage */
     }
     .hero-image img {
         max-width: 340px;
