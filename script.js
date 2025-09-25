@@ -154,27 +154,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    /* ================= Scroll Reveal Animations ================= */
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-    };
-
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("animate-fade-in");
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Observe elements for scroll animations
-    document
-        .querySelectorAll(".popular-dishes__card, .about-image, .recent-image")
-        .forEach((el) => {
-            revealObserver.observe(el);
-        });
+    /* ================= Scroll Reveal Animations - REMOVED ================= */
+    // Scroll reveal animations have been removed for better performance
 
     /* ================= Enhanced Form Interactions ================= */
     const newsletterForm = document.querySelector(

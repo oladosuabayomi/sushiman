@@ -46,7 +46,7 @@
     line-height: var(--line-tight);
     color: var(--color-text-primary);
     margin-bottom: var(--space-6);
-    animation: slideInLeft 0.8s ease-out;
+    transition: all var(--transition-base);
 }
 
 .hero-content__left-heading span {
@@ -54,14 +54,18 @@
     align-items: center;
     gap: var(--space-3);
     color: var(--primary-500);
-    animation: bounceIn 1s ease-out 0.5s both;
+    transition: all var(--transition-base);
 }
 
 .hero-content__left-heading span img {
     width: 48px;
     height: 48px;
     object-fit: contain;
-    animation: spin 3s linear infinite;
+    transition: transform var(--transition-base);
+}
+
+.hero-content__left-heading span img:hover {
+    transform: rotate(10deg);
 }
 
 .hero-content__left p {
@@ -72,14 +76,14 @@
     color: var(--color-text-secondary);
     margin-bottom: var(--space-8);
     max-width: 480px;
-    animation: slideUp 0.8s ease-out 0.3s both;
+    transition: all var(--transition-base);
 }
 
 .hero-content__button {
     display: flex;
     gap: var(--space-4);
     align-items: center;
-    animation: slideUp 0.8s ease-out 0.6s both;
+    transition: all var(--transition-base);
 }
 
 .hero-image {
@@ -87,7 +91,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: slideInRight 0.8s ease-out 0.4s both;
+    transition: all var(--transition-base);
 }
 
 .hero-image img {
@@ -96,7 +100,6 @@
     object-fit: contain;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
     transition: all var(--transition-slow);
-    animation: pulse 4s ease-in-out infinite;
 }
 
 .hero-image img:hover {
@@ -199,7 +202,7 @@
     }
 }
 
-/* Motion safe subtle float for hero image */
+/* Keep subtle floating animation for leaf decorations only */
 @keyframes float {
     0%,
     100% {
@@ -210,38 +213,10 @@
     }
 }
 
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes pulse {
-    0%,
-    100% {
-        transform: scale(1);
-        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
-    }
-    50% {
-        transform: scale(1.02);
-        filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.2));
-    }
-}
+/* Remove complex animations and keep only subtle leaf floating */
 @media (prefers-reduced-motion: no-preference) {
-    .hero-image img {
-        animation: heroFloat 8s ease-in-out infinite;
-    }
-}
-
-@keyframes heroFloat {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-14px);
+    .hero__bg-leaf__right,
+    .hero__bg-leaf__left {
+        animation: float 6s ease-in-out infinite;
     }
 }
