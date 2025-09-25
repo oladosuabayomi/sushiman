@@ -1,6 +1,6 @@
 # 🍣 Sushiman - Professional Japanese Restaurant Website
 
-![Sushiman](assets/preview.png)
+![Sushiman](public/preview.png)
 
 A modern, responsive website for Sushiman Japanese Restaurant featuring advanced animations, mobile-first design, and professional user experience.
 
