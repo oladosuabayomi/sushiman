@@ -6,11 +6,7 @@
         <link rel="icon" href="assets/logo.png" type="image/png" />
 
         <!-- Preload critical assets -->
-        <link
-            rel="preload"
-            href="assets/logo.png"
-            as="image"
-        />
+        <link rel="preload" href="assets/logo.png" as="image" />
         <link
             rel="preload"
             href="assets/popular-sushi-rolls 1.png"
@@ -377,8 +373,8 @@
             </div>
         </section>
 
-        <section class="newsletter width-80-container section-spacing" id="newsletter">
-            <div class="newsletter-content">
+        <section class="newsletter section-spacing" id="newsletter">
+            <div class="newsletter-content width-80-container">
                 <img
                     class="newsletter-content__image"
                     src="assets/newsletter-sushi 1.png"
@@ -565,12 +561,248 @@
             </div>
         </section>
 
-        <script
-            src="./script.js"
-            onerror="console.error('Failed to load script.js'); alert('Script failed to load. Some features may not work.');"
-        ></script>
+        <script>
+            // Essential inline JavaScript for Sushiman website
+            document.addEventListener("DOMContentLoaded", function () {
+                /* ================= Popular Dishes Carousel ================= */
+                const popularDishes = document.getElementById("popularDishes");
+                const scrollLeftBtn = document.getElementById("scrollLeft");
+                const scrollRightBtn = document.getElementById("scrollRight");
+
+                if (popularDishes && scrollLeftBtn && scrollRightBtn) {
+                    function getScrollAmount() {
+                        try {
+                            const card = popularDishes.querySelector(
+                                ".popular-dishes__card"
+                            );
+                            if (!card) return 450;
+                            const cardWidth = card.offsetWidth;
+                            const gap = 48;
+                            return cardWidth + gap;
+                        } catch (error) {
+                            console.warn(
+                                "Error calculating scroll amount:",
+                                error
+                            );
+                            return 450;
+                        }
+                    }
+
+                    function scrollCarousel(direction) {
+                        const scrollAmount = getScrollAmount();
+                        const scrollValue =
+                            direction === "left" ? -scrollAmount : scrollAmount;
+                        popularDishes.scrollBy({
+                            left: scrollValue,
+                            behavior: "smooth",
+                        });
+                    }
+
+                    function updateButtons() {
+                        try {
+                            const { scrollLeft, scrollWidth, clientWidth } =
+                                popularDishes;
+                            const maxScroll = scrollWidth - clientWidth;
+                            scrollLeftBtn.disabled = scrollLeft <= 0;
+                            scrollLeftBtn.style.opacity =
+                                scrollLeft <= 0 ? "0.5" : "1";
+                            scrollRightBtn.disabled =
+                                scrollLeft >= maxScroll - 1;
+                            scrollRightBtn.style.opacity =
+                                scrollLeft >= maxScroll - 1 ? "0.5" : "1";
+                        } catch (error) {
+                            console.warn(
+                                "Error updating carousel buttons:",
+                                error
+                            );
+                        }
+                    }
+
+                    scrollLeftBtn.addEventListener("click", () =>
+                        scrollCarousel("left")
+                    );
+                    scrollRightBtn.addEventListener("click", () =>
+                        scrollCarousel("right")
+                    );
+                    popularDishes.addEventListener("scroll", updateButtons);
+                    setTimeout(updateButtons, 100);
+                    window.addEventListener("resize", () =>
+                        setTimeout(updateButtons, 150)
+                    );
+                }
+
+                /* ================= Mobile Navigation ================= */
+                const toggle = document.querySelector(".header__toggle");
+                const menu = document.getElementById("headerMenu");
+                const overlay = document.querySelector(".header__overlay");
+                const focusableSelectors =
+                    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+                let lastFocusedBeforeOpen = null;
+
+                function openNav() {
+                    document.body.classList.add("nav-open");
+                    toggle.setAttribute("aria-expanded", "true");
+                    lastFocusedBeforeOpen = document.activeElement;
+                    const firstLink = menu.querySelector("a");
+                    firstLink && firstLink.focus();
+                    trapFocus();
+                }
+
+                function closeNav() {
+                    document.body.classList.remove("nav-open");
+                    toggle.setAttribute("aria-expanded", "false");
+                    releaseFocus();
+                    toggle.focus();
+                }
+
+                function trapFocus() {
+                    const focusables =
+                        menu.querySelectorAll(focusableSelectors);
+                    if (!focusables.length) return;
+                    const first = focusables[0];
+                    const last = focusables[focusables.length - 1];
+
+                    function handle(e) {
+                        if (e.key !== "Tab") return;
+                        if (e.shiftKey && document.activeElement === first) {
+                            e.preventDefault();
+                            last.focus();
+                        } else if (
+                            !e.shiftKey &&
+                            document.activeElement === last
+                        ) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    }
+                    menu.addEventListener("keydown", handle);
+                    menu._trapHandler = handle;
+                }
+
+                function releaseFocus() {
+                    if (menu._trapHandler)
+                        menu.removeEventListener("keydown", menu._trapHandler);
+                    if (lastFocusedBeforeOpen)
+                        lastFocusedBeforeOpen.focus({ preventScroll: true });
+                }
+
+                function toggleNav() {
+                    const isOpen = document.body.classList.contains("nav-open");
+                    isOpen ? closeNav() : openNav();
+                }
+
+                if (toggle && menu && overlay) {
+                    toggle.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleNav();
+                    });
+                    toggle.addEventListener(
+                        "touchstart",
+                        (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            toggleNav();
+                        },
+                        { passive: false }
+                    );
+                    overlay.addEventListener("click", closeNav);
+
+                    document.addEventListener("keydown", (e) => {
+                        if (
+                            e.key === "Escape" &&
+                            document.body.classList.contains("nav-open")
+                        )
+                            closeNav();
+                    });
+
+                    window.addEventListener("resize", () => {
+                        if (
+                            window.innerWidth > 840 &&
+                            document.body.classList.contains("nav-open")
+                        )
+                            closeNav();
+                    });
+
+                    menu.querySelectorAll("a").forEach((link) => {
+                        link.addEventListener("click", () => {
+                            menu.querySelectorAll("li").forEach((li) =>
+                                li.classList.remove("header__menu-active")
+                            );
+                            link.parentElement.classList.add(
+                                "header__menu-active"
+                            );
+                            closeNav();
+                        });
+                    });
+                }
+
+                /* ================= Newsletter Form ================= */
+                const newsletterForm = document.querySelector(
+                    ".newsletter-content__subscribe-button"
+                );
+                const emailInput = document.querySelector(
+                    ".newsletter-content__subscribe-button--input"
+                );
+                const submitBtn = document.querySelector(
+                    ".newsletter-content__subscribe-button--subscribe"
+                );
+
+                if (newsletterForm && emailInput && submitBtn) {
+                    emailInput.addEventListener("focus", () => {
+                        newsletterForm.classList.add("focused");
+                    });
+
+                    emailInput.addEventListener("blur", () => {
+                        if (!emailInput.value) {
+                            newsletterForm.classList.remove("focused");
+                        }
+                    });
+
+                    newsletterForm.addEventListener("submit", async (e) => {
+                        e.preventDefault();
+                        if (!emailInput.value || !emailInput.validity.valid) {
+                            emailInput.classList.add("error");
+                            setTimeout(
+                                () => emailInput.classList.remove("error"),
+                                2000
+                            );
+                            return;
+                        }
+
+                        submitBtn.innerHTML =
+                            '<div class="loading-spinner"></div>';
+                        submitBtn.disabled = true;
+
+                        setTimeout(() => {
+                            submitBtn.innerHTML = "Subscribe";
+                            submitBtn.disabled = false;
+                            emailInput.value = "";
+                            newsletterForm.classList.remove("focused");
+                        }, 2000);
+                    });
+                }
+            });
+        </script>
+
+        <!-- Fallback: Try to load external script.js with multiple fallback options -->
+        <!-- <script>
+            // Try to load external script as fallback for additional features
+            (function () {
+                const script = document.createElement("script");
+                script.src = "./script.js";
+                script.async = true;
+                script.onerror = function () {
+                    console.log(
+                        "External script.js not available - using inline fallback"
+                    );
+                };
+                document.head.appendChild(script);
+            })();
+        </script>
+
         <noscript>
             <p>This website requires JavaScript to function properly.</p>
-        </noscript>
+        </noscript> -->
     </body>
 </html>
