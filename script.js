@@ -1,20 +1,3 @@
-/*!
- * Sushiman - Interactive Features & Functionality
- *
- * Version: 2.0.0
- * Description: Modern JavaScript implementation with performance optimization
- * Author: Sushiman Development Team
- * Date: September 2025
- *
- * Features:
- * - Mobile-responsive carousel with touch support
- * - Accessible navigation with keyboard support
- * - Enhanced form interactions with validation
- * - Smooth scroll animations and parallax effects
- * - Performance-optimized image lazy loading
- * - Cross-browser compatibility ensured
- */
-
 // Popular Dishes Carousel Scrolling Functionality
 
 document.addEventListener("DOMContentLoaded", function () {

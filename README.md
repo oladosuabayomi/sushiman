@@ -230,8 +230,8 @@ For questions or issues, please refer to the code comments or contact the develo
 
 ---
 
-**Version**: 2.0.0  
+**Version**: 2.0.0 
 **Last Updated**: September 2025  
 **Status**: Production Ready ✅
 
-Built with ❤️ for Sushiman Restaurant
+Built with ❤️ for Sushiman Restaurant 
